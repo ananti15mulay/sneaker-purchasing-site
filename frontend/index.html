@@ -1,0 +1,31 @@
+<!-- INSECURE VERSION: sneaker site vulnerable to SQLi and XSS -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sneaker Shop (Insecure)</title>
+</head>
+<body>
+  <h1>Welcome to Sneaker Store</h1>
+  <form action="backend/login.php" method="POST">
+    Username: <input type="text" name="username"><br>
+    Password: <input type="password" name="password"><br>
+    <input type="submit" value="Login">
+  </form>
+
+  <form action="backend/review.php" method="POST">
+    Leave a Review: <input type="text" name="review"><br>
+    <input type="submit" value="Submit Review">
+  </form>
+
+  <form action="backend/payment.php" method="POST">
+    <h2>Payment Details</h2>
+    Card Number: <input type="text" name="card"><br>
+    Expiry Date: <input type="text" name="expiry"><br>
+    CVV: <input type="text" name="cvv"><br>
+    <input type="submit" value="Pay Now">
+  </form>
+
+  <h2>Cool Sneaker</h2>
+  <p>Price: $150</p>
+</body>
+</html>
