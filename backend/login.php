@@ -1,20 +1,29 @@
 <?php
+session_start();
 $conn = mysqli_connect("localhost", "root", "", "sneaker_db");
+
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 
 $username = $_POST['username'];
 $password = $_POST['password'];
 
-$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-$result = mysqli_query($conn, $query);
+$stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$stmt->store_result();
 
-if (mysqli_num_rows($result) == 1) {
-    // echo "Login Successful";
-    $_SESSION['username'] = $username;
-    // header("Location: ../frontend/dashboard.html");
-    header("Location: ../frontend/review.php");
+if ($stmt->num_rows == 1) {
+    $stmt->bind_result($hashed_password);
+    $stmt->fetch();
 
-    exit();
-} else {
-    echo "Login Failed";
+    if (password_verify($password, $hashed_password)) {
+        $_SESSION['username'] = $username;
+        header("Location: ../frontend/review.php");
+        exit();
+    }
 }
+
+echo "Login Failed";
 ?>
