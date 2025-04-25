@@ -2,6 +2,8 @@
 <html>
 <head>
   <title>Leave a Review - Sneaker Store</title>
+  <!-- <link rel="stylesheet" href="style.css"> -->
+
 </head>
 <body>
   <h1>Leave a Review</h1>

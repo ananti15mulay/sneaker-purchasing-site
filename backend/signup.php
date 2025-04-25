@@ -9,11 +9,11 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 // Hash the password before storing (for security)
-$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+// $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 // Use prepared statement
 $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-$stmt->bind_param("ss", $username, $hashed_password);
+$stmt->bind_param("ss", $username, $password);
 
 if ($stmt->execute()) {
     // Redirect to login page after successful sign up
